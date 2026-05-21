@@ -30,45 +30,44 @@
     <aside class="w-[80px] lg:w-[260px] bg-gray-900 text-white p-[25px] flex flex-col justify-between transition-all duration-300 z-20">
 
       <div class="flex items-center gap-[10px] mb-[40px] justify-center lg:justify-start">
-        <i class="fa-solid fa-list-check text-[20px] lg:text-[28px] text-indigo-500"></i>
-        <h2 class="hidden lg:block text-xl font-semibold m-0">Todo Admin</h2>
+        <h2 class="hidden lg:block text-3xl font-bold m-0 tracking-wide">Admin</h2>
       </div>
 
       <ul class="list-none p-0 m-0">
 
-        <li class="mb-[15px] group">
-          <a href="#" class="flex items-center gap-[12px] p-[14px] rounded-[12px] transition-all duration-300 text-white no-underline bg-indigo-500 translate-x-[5px]">
-            <i class="fa-solid fa-house text-[20px] lg:text-base"></i>
+        <li class="mb-[15px] group -ml-[10px]">
+          <a href="#" class="flex items-center gap-[12px] py-[12px] px-[15px] rounded-[12px] transition-all duration-300 text-white no-underline bg-indigo-500">
+            <i class="fa-solid fa-house text-[20px] lg:text-base w-[20px] text-center"></i>
             <span class="hidden lg:block">Dashboard</span>
           </a>
         </li>
 
-        <li class="mb-[15px] group">
-          <a href="#" class="flex items-center gap-[12px] p-[14px] rounded-[12px] transition-all duration-300 text-white no-underline hover:bg-indigo-500 hover:translate-x-[5px]">
-            <i class="fa-solid fa-user text-[20px] lg:text-base"></i>
+        <li class="mb-[15px] group -ml-[10px]">
+          <a href="#" class="flex items-center gap-[12px] py-[12px] px-[15px] rounded-[12px] transition-all duration-300 text-white no-underline hover:bg-indigo-500 hover:translate-x-[5px]">
+            <i class="fa-solid fa-user text-[20px] lg:text-base w-[20px] text-center"></i>
             <span class="hidden lg:block">User</span>
           </a>
         </li>
 
-        <li class="mb-[15px] group">
-          <a href="#" class="flex items-center gap-[12px] p-[14px] rounded-[12px] transition-all duration-300 text-white no-underline hover:bg-indigo-500 hover:translate-x-[5px]">
-            <i class="fa-solid fa-list text-[20px] lg:text-base"></i>
+        <li class="mb-[15px] group -ml-[10px]">
+          <a href="#" class="flex items-center gap-[12px] py-[12px] px-[15px] rounded-[12px] transition-all duration-300 text-white no-underline hover:bg-indigo-500 hover:translate-x-[5px]">
+            <i class="fa-solid fa-list text-[20px] lg:text-base w-[20px] text-center"></i>
             <span class="hidden lg:block">To Do List</span>
           </a>
         </li>
 
-        <li class="mb-[15px] group">
-          <a href="#" class="flex items-center gap-[12px] p-[14px] rounded-[12px] transition-all duration-300 text-white no-underline hover:bg-indigo-500 hover:translate-x-[5px]">
-            <i class="fa-solid fa-check text-[20px] lg:text-base"></i>
+        <li class="mb-[15px] group -ml-[10px]">
+          <a href="#" class="flex items-center gap-[12px] py-[12px] px-[15px] rounded-[12px] transition-all duration-300 text-white no-underline hover:bg-indigo-500 hover:translate-x-[5px]">
+            <i class="fa-solid fa-check text-[20px] lg:text-base w-[20px] text-center"></i>
             <span class="hidden lg:block">To Do Selesai</span>
           </a>
         </li>
 
       </ul>
 
-      <div class="mt-auto">
-        <a href="#" class="flex items-center gap-[12px] p-[14px] rounded-[12px] transition-all duration-300 text-white no-underline hover:bg-red-500 justify-center lg:justify-start">
-          <i class="fa-solid fa-right-from-bracket text-[20px] lg:text-base"></i>
+      <div class="mt-auto -ml-[10px]">
+        <a href="#" class="flex items-center gap-[12px] py-[12px] px-[15px] rounded-[12px] transition-all duration-300 text-white no-underline hover:bg-red-500 justify-center lg:justify-start hover:translate-x-[5px]">
+          <i class="fa-solid fa-right-from-bracket text-[20px] lg:text-base w-[20px] text-center"></i>
           <span class="hidden lg:block">Logout</span>
         </a>
       </div>
@@ -112,7 +111,7 @@
               <i class="fa-solid fa-users"></i>
             </div>
             <div>
-              <h3 class="text-2xl font-bold m-0 text-gray-800">1,250</h3>
+              <h3 class="text-2xl font-bold m-0 text-gray-800">{{ number_format($total_users) }}</h3>
               <p class="text-gray-500 m-0">Total User</p>
             </div>
           </div>
@@ -154,7 +153,7 @@
           <div class="bg-white p-[20px] rounded-[18px] shadow-[0_4px_20px_rgba(0,0,0,0.05)] overflow-x-auto">
 
             <div class="mb-[20px]">
-              <h2 class="text-xl font-bold text-gray-800">To Do Terbaru</h2>
+              <h2 class="text-xl font-bold text-gray-800">User Terbaru (Dari Aplikasi)</h2>
             </div>
 
             <table class="w-full border-collapse min-w-[500px]">
@@ -162,93 +161,47 @@
               <thead>
                 <tr>
                   <th class="bg-slate-50 py-[14px] px-[14px] text-left font-semibold text-gray-700">No</th>
+                  <th class="bg-slate-50 py-[14px] px-[14px] text-left font-semibold text-gray-700">Profil</th>
                   <th class="bg-slate-50 py-[14px] px-[14px] text-left font-semibold text-gray-700">Nama</th>
-                  <th class="bg-slate-50 py-[14px] px-[14px] text-left font-semibold text-gray-700">Task</th>
-                  <th class="bg-slate-50 py-[14px] px-[14px] text-left font-semibold text-gray-700">Status</th>
+                  <th class="bg-slate-50 py-[14px] px-[14px] text-left font-semibold text-gray-700">Email</th>
+                  <th class="bg-slate-50 py-[14px] px-[14px] text-left font-semibold text-gray-700">Platform</th>
                 </tr>
               </thead>
 
               <tbody>
-
-                <tr class="border-b border-gray-100 last:border-0">
-                  <td class="py-[14px] px-[14px] text-left text-gray-600">1</td>
-                  <td class="py-[14px] px-[14px] text-left font-medium text-gray-800">Fhaty</td>
-                  <td class="py-[14px] px-[14px] text-left text-gray-600">Belajar Laravel API</td>
+                @forelse($latest_users as $index => $user)
+                <tr class="border-b border-gray-100 last:border-0 hover:bg-gray-50 transition-colors">
+                  <td class="py-[14px] px-[14px] text-left text-gray-600">{{ $index + 1 }}</td>
+                  <td class="py-[14px] px-[14px] text-left text-gray-600">
+                      @if($user->avatar)
+                          <img src="{{ $user->avatar }}" alt="avatar" class="w-[30px] h-[30px] rounded-full object-cover shadow-sm">
+                      @else
+                          <div class="w-[30px] h-[30px] rounded-full bg-gray-200 flex items-center justify-center text-xs text-gray-500 shadow-sm"><i class="fa-solid fa-user"></i></div>
+                      @endif
+                  </td>
+                  <td class="py-[14px] px-[14px] text-left font-medium text-gray-800">{{ $user->name }}</td>
+                  <td class="py-[14px] px-[14px] text-left text-gray-600">{{ $user->email }}</td>
                   <td class="py-[14px] px-[14px] text-left">
-                    <span class="bg-green-100 text-green-800 py-[6px] px-[12px] rounded-[20px] text-[13px] font-semibold">Selesai</span>
+                    @if($user->provider_name == 'google')
+                        <span class="bg-red-100 text-red-800 py-[6px] px-[12px] rounded-[20px] text-[13px] font-semibold"><i class="fa-brands fa-google mr-1"></i> Google</span>
+                    @elseif($user->provider_name == 'apple')
+                        <span class="bg-gray-100 text-gray-800 py-[6px] px-[12px] rounded-[20px] text-[13px] font-semibold"><i class="fa-brands fa-apple mr-1"></i> Apple</span>
+                    @else
+                        <span class="bg-indigo-100 text-indigo-800 py-[6px] px-[12px] rounded-[20px] text-[13px] font-semibold">Sistem</span>
+                    @endif
                   </td>
                 </tr>
-
-                <tr class="border-b border-gray-100 last:border-0">
-                  <td class="py-[14px] px-[14px] text-left text-gray-600">2</td>
-                  <td class="py-[14px] px-[14px] text-left font-medium text-gray-800">Andi</td>
-                  <td class="py-[14px] px-[14px] text-left text-gray-600">Design UI Mobile</td>
-                  <td class="py-[14px] px-[14px] text-left">
-                    <span class="bg-red-100 text-red-800 py-[6px] px-[12px] rounded-[20px] text-[13px] font-semibold">Pending</span>
-                  </td>
+                @empty
+                <tr>
+                    <td colspan="5" class="py-[20px] px-[14px] text-center text-gray-500 font-medium">Belum ada user yang terdaftar dari aplikasi</td>
                 </tr>
-
-                <tr class="border-b border-gray-100 last:border-0">
-                  <td class="py-[14px] px-[14px] text-left text-gray-600">3</td>
-                  <td class="py-[14px] px-[14px] text-left font-medium text-gray-800">Sinta</td>
-                  <td class="py-[14px] px-[14px] text-left text-gray-600">Integrasi Database</td>
-                  <td class="py-[14px] px-[14px] text-left">
-                    <span class="bg-green-100 text-green-800 py-[6px] px-[12px] rounded-[20px] text-[13px] font-semibold">Selesai</span>
-                  </td>
-                </tr>
-
-                <tr class="border-b border-gray-100 last:border-0">
-                  <td class="py-[14px] px-[14px] text-left text-gray-600">4</td>
-                  <td class="py-[14px] px-[14px] text-left font-medium text-gray-800">Budi</td>
-                  <td class="py-[14px] px-[14px] text-left text-gray-600">Membuat API</td>
-                  <td class="py-[14px] px-[14px] text-left">
-                    <span class="bg-red-100 text-red-800 py-[6px] px-[12px] rounded-[20px] text-[13px] font-semibold">Pending</span>
-                  </td>
-                </tr>
-
+                @endforelse
               </tbody>
 
             </table>
 
           </div>
-
-          <div class="bg-white p-[20px] rounded-[18px] shadow-[0_4px_20px_rgba(0,0,0,0.05)]">
-
-            <div class="mb-[20px]">
-              <h2 class="text-xl font-bold text-gray-800">Recent Activity</h2>
-            </div>
-
-            <div class="flex flex-col gap-[20px]">
-
-              <div class="flex items-center gap-[15px]">
-                <i class="fa-solid fa-circle-check w-[50px] h-[50px] bg-indigo-500 text-white rounded-full flex items-center justify-center text-xl shrink-0"></i>
-                <div>
-                  <h4 class="font-semibold text-gray-800 m-0">User menyelesaikan task</h4>
-                  <p class="text-gray-500 text-[14px] m-0 mt-1">2 menit yang lalu</p>
-                </div>
-              </div>
-
-              <div class="flex items-center gap-[15px]">
-                <i class="fa-solid fa-user-plus w-[50px] h-[50px] bg-indigo-500 text-white rounded-full flex items-center justify-center text-xl shrink-0"></i>
-                <div>
-                  <h4 class="font-semibold text-gray-800 m-0">User baru mendaftar</h4>
-                  <p class="text-gray-500 text-[14px] m-0 mt-1">10 menit yang lalu</p>
-                </div>
-              </div>
-
-              <div class="flex items-center gap-[15px]">
-                <i class="fa-solid fa-list w-[50px] h-[50px] bg-indigo-500 text-white rounded-full flex items-center justify-center text-xl shrink-0"></i>
-                <div>
-                  <h4 class="font-semibold text-gray-800 m-0">Task baru ditambahkan</h4>
-                  <p class="text-gray-500 text-[14px] m-0 mt-1">20 menit yang lalu</p>
-                </div>
-              </div>
-
-            </div>
-
-          </div>
-
-        </section>
+      </section>
 
       </div> </main>
 
