@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Admin Dashboard To Do List</title>
+  <title>Admin Dashboard</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -100,7 +100,7 @@
       <div class="p-[25px]">
         
         <div class="mb-[25px] mx-0">
-          <h1 class="text-[30px] font-bold m-0 text-gray-800">Dashboard To Do List</h1>
+          <h1 class="text-[30px] font-bold m-0 text-gray-800">Dashboard</h1>
           <p class="text-gray-500 mt-2">Selamat datang kembali admin 👋</p>
         </div>
 
@@ -153,7 +153,7 @@
           <div class="bg-white p-[20px] rounded-[18px] shadow-[0_4px_20px_rgba(0,0,0,0.05)] overflow-x-auto">
 
             <div class="mb-[20px]">
-              <h2 class="text-xl font-bold text-gray-800">User Terbaru (Dari Aplikasi)</h2>
+              <h2 class="text-xl font-bold text-gray-800">User Terbaru</h2>
             </div>
 
             <table class="w-full border-collapse min-w-[500px]">
