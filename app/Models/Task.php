@@ -9,12 +9,13 @@ class Task extends Model
 {
     use HasFactory;
 
-    // TAMBAHKAN BARIS INI UNTUK MENGIZINKAN PENGISIAN DATA
     protected $fillable = [
         'user_id',
-        'title',
         'category',
-        'due_date',
+        'title',
+        'description',
+        'deadline',
+        'priority',
         'is_completed'
     ];
 }

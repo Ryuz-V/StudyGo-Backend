@@ -1,22 +1,50 @@
 <?php
 
-use App\Http\Controllers\Api\AuthController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\API\TaskController;
 
-// Route untuk Login
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\TaskController;
+
+// =========================
+// AUTH
+// =========================
+
+// Login social
 Route::post('/login/social', [AuthController::class, 'socialLogin']);
 
-// Route untuk Kirim Tugas (SUDAH DIKELUARKAN & BERDIRI SENDIRI)
-Route::post('/tasks', [TaskController::class, 'store']);
 
+// =========================
+// USER
+// =========================
 
-// Route untuk melihat data user yang sedang login (membutuhkan token Sanctum)
-Route::middleware('auth:sanctum')->get('/user', function (\Illuminate\Http\Request $request) {
+// Ambil data user login
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return response()->json([
         'success' => true,
         'data' => $request->user()
     ]);
 });
 
+
+// =========================
+// TASK CRUD
+// =========================
+
+// Ambil semua task
 Route::get('/tasks', [TaskController::class, 'index']);
+
+// Ambil task berdasarkan ID
+Route::get('/tasks/{id}', [TaskController::class, 'show']);
+
+// Tambah task
+Route::post('/tasks', [TaskController::class, 'store']);
+
+// Update task
+Route::put('/tasks/{id}', [TaskController::class, 'update']);
+
+// Tandai task selesai
+Route::patch('/tasks/{id}/complete', [TaskController::class, 'complete']);
+
+// Hapus task
+Route::delete('/tasks/{id}', [TaskController::class, 'destroy']);
