@@ -1,50 +1,33 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
-use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\ProfileController;
 
-// =========================
-// AUTH
-// =========================
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
 
-// Login social
-Route::post('/login/social', [AuthController::class, 'socialLogin']);
+Route::get('/categories', [CategoryController::class, 'index']);
+Route::post('/categories', [CategoryController::class, 'store']);
 
-
-// =========================
-// USER
-// =========================
-
-// Ambil data user login
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return response()->json([
-        'success' => true,
-        'data' => $request->user()
-    ]);
-});
-
-
-// =========================
-// TASK CRUD
-// =========================
-
-// Ambil semua task
 Route::get('/tasks', [TaskController::class, 'index']);
-
-// Ambil task berdasarkan ID
-Route::get('/tasks/{id}', [TaskController::class, 'show']);
-
-// Tambah task
 Route::post('/tasks', [TaskController::class, 'store']);
 
-// Update task
 Route::put('/tasks/{id}', [TaskController::class, 'update']);
-
-// Tandai task selesai
-Route::patch('/tasks/{id}/complete', [TaskController::class, 'complete']);
-
-// Hapus task
 Route::delete('/tasks/{id}', [TaskController::class, 'destroy']);
+
+Route::put('/tasks/{id}/complete', [TaskController::class, 'complete']);
+Route::put('/tasks/{id}/retrieve', [TaskController::class, 'retrieve']);
+
+
+// TAMBAHAN ENDPOINT
+Route::get('/tasks/completed', [TaskController::class, 'completed']);
+Route::get('/tasks/pending', [TaskController::class, 'pending']);
+Route::get('/tasks/category/{id}', [TaskController::class, 'byCategory']);
+Route::get('/tasks/search', [TaskController::class, 'search']);
+
+
+Route::get('/profile/{id}', [ProfileController::class, 'show']);
+Route::put('/profile/{id}', [ProfileController::class, 'update']);

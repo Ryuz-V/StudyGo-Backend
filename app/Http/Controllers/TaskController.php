@@ -2,146 +2,123 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Task;
 use Illuminate\Http\Request;
+use App\Models\Task;
 
 class TaskController extends Controller
 {
-    // Tambah task
-public function store(Request $request)
-{
-    $validated = $request->validate([
-        'user_id' => 'required|integer',
-        'category' => 'required|string',
-        'title' => 'required|string|max:255',
-        'description' => 'nullable|string',
-        'deadline' => 'required|date',
-        'priority' => 'required|string',
-        'is_completed' => 'boolean'
-    ]);
-
-    $task = Task::create($validated);
-
-    return response()->json([
-        'message' => 'Task berhasil ditambahkan',
-        'data' => $task
-    ], 201);
-}
-    // Menampilkan semua task
-    public function index(Request $request)
+    public function index()
     {
-        $query = Task::query();
-
-        // Filter status
-        if ($request->has('status')) {
-            $query->where('status', $request->status);
-        }
-
-        // Filter priority
-        if ($request->has('priority')) {
-            $query->where('priority', $request->priority);
-        }
-
-        // Filter deadline
-        if ($request->has('deadline')) {
-            $query->whereDate('due_date', $request->due_date);
-        }
-
-        // Filter category
-        if ($request->has('category')) {
-            $query->where('category', $request->category);
-        }
-
-        // Sorting aman
-        $allowedSorts = ['deadline', 'priority', 'title'];
-
-        if ($request->has('sort') && in_array($request->sort, $allowedSorts)) {
-            $query->orderBy($request->sort, 'asc');
-        }
-
-        return response()->json(
-            $query->get()
-        );
+        return Task::with('category')->get();
     }
 
-    // Menampilkan task berdasarkan ID
-    public function show($id)
+    public function store(Request $request)
     {
-        $task = Task::find($id);
-
-        if (!$task) {
-            return response()->json([
-                'message' => 'Task tidak ditemukan'
-            ], 404);
-        }
-
-        return response()->json($task);
-    }
-
-    // Update task
-    public function update(Request $request, $id)
-    {
-        $task = Task::find($id);
-
-        if (!$task) {
-            return response()->json([
-                'message' => 'Task tidak ditemukan'
-            ], 404);
-        }
-
-$validated = $request->validate([
-    'user_id' => 'sometimes|integer',
-    'category' => 'sometimes|string',
-    'title' => 'sometimes|string|max:255',
-    'description' => 'nullable|string',
-    'deadline' => 'sometimes|date',
-    'priority' => 'sometimes|string',
-    'is_completed' => 'sometimes|boolean'
-]);
-
-        $task->update($validated);
+        $task = Task::create([
+            'user_id' => $request->user_id,
+            'category_id' => $request->category_id,
+            'title' => $request->title,
+            'description' => $request->description,
+            'deadline' => $request->deadline,
+            'is_completed' => false
+        ]);
 
         return response()->json([
-            'message' => 'Task berhasil diupdate',
+            'message' => 'Task added',
             'data' => $task
         ]);
     }
 
-    // Menandai task selesai
-public function complete($id)
-{
-    $task = Task::find($id);
+    public function update(Request $request, $id)
+    {
+        $task = Task::findOrFail($id);
 
-    if (!$task) {
+        $task->update($request->all());
+
         return response()->json([
-            'message' => 'Task tidak ditemukan'
-        ], 404);
+            'message' => 'Task updated'
+        ]);
     }
 
-    $task->is_completed = true;
-    $task->save();
-
-    return response()->json([
-        'message' => 'Task selesai',
-        'data' => $task
-    ]);
-}
-
-    // Hapus task
     public function destroy($id)
     {
-        $task = Task::find($id);
-
-        if (!$task) {
-            return response()->json([
-                'message' => 'Task tidak ditemukan'
-            ], 404);
-        }
-
-        $task->delete();
+        Task::destroy($id);
 
         return response()->json([
-            'message' => 'Task berhasil dihapus'
+            'message' => 'Task deleted'
         ]);
+    }
+
+    public function complete($id)
+    {
+        $task = Task::findOrFail($id);
+
+        $task->is_completed = true;
+
+        $task->save();
+
+        return response()->json([
+            'message' => 'Task completed'
+        ]);
+    }
+
+    public function retrieve($id)
+    {
+        $task = Task::findOrFail($id);
+
+        $task->is_completed = false;
+
+        $task->save();
+
+        return response()->json([
+            'message' => 'Task retrieved'
+        ]);
+    }
+
+
+    // TASK COMPLETED
+    public function completed()
+    {
+        $tasks = Task::where('is_completed', 1)
+                    ->with('category')
+                    ->get();
+
+        return response()->json($tasks);
+    }
+
+
+    // TASK PENDING
+    public function pending()
+    {
+        $tasks = Task::where('is_completed', 0)
+                    ->with('category')
+                    ->get();
+
+        return response()->json($tasks);
+    }
+
+
+    // TASK BERDASARKAN CATEGORY
+    public function byCategory($id)
+    {
+        $tasks = Task::where('category_id', $id)
+                    ->with('category')
+                    ->get();
+
+        return response()->json($tasks);
+    }
+
+
+    // SEARCH TASK
+    public function search(Request $request)
+    {
+        $keyword = $request->q;
+
+        $tasks = Task::where('title', 'LIKE', "%$keyword%")
+                    ->orWhere('description', 'LIKE', "%$keyword%")
+                    ->with('category')
+                    ->get();
+
+        return response()->json($tasks);
     }
 }

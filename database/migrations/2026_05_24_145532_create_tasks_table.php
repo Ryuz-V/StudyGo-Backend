@@ -6,28 +6,38 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-public function up(): void
-{
-    Schema::create('tasks', function (Blueprint $table) {
-        $table->id();
-        $table->unsignedBigInteger('user_id'); // Pemilik tugas
-        $table->string('title'); // Nama tugas
-        $table->date('due_date')->nullable(); // Tenggat waktu
-        $table->string('category')->default('Tugas'); // Wishlist, Kerja, dll
-        $table->boolean('is_completed')->default(false); // Status selesai/belum
-        $table->timestamps();
+    public function up(): void
+    {
+        Schema::create('tasks', function (Blueprint $table) {
 
-        // Relasi ke tabel users
-        $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-    });
-}
+            $table->id('id_task');
 
-    /**
-     * Reverse the migrations.
-     */
+            $table->unsignedBigInteger('user_id');
+
+            $table->unsignedBigInteger('category_id');
+
+            $table->string('title');
+
+            $table->text('description');
+
+            $table->date('deadline');
+
+            $table->boolean('is_completed')->default(false);
+
+            $table->timestamps();
+
+            $table->foreign('user_id')
+                  ->references('id')
+                  ->on('users')
+                  ->onDelete('cascade');
+
+            $table->foreign('category_id')
+                  ->references('id_category')
+                  ->on('categories')
+                  ->onDelete('cascade');
+        });
+    }
+
     public function down(): void
     {
         Schema::dropIfExists('tasks');
